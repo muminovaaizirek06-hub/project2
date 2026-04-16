@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPlatform - Онлайн Окуу Системасы</title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+   
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">🎓 EduPlatform</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">🏠 Башкы бет</a>
+        <a href="#courses">📚 Курстар</a>
+        <a href="#feedback">💬 Пикир</a>
+      </nav>
+      <div class="nav-actions" id="navActions">
+        <button class="theme-toggle" id="themeToggle" title="Караңгы режим">🌙</button>
+        <button class="btn btn-outline" id="loginBtn">🔑 Кирүү</button>
+        <button class="btn btn-primary" id="registerBtn">📝 Катталуу</button>
+        <button class="btn btn-outline" id="logoutBtn" style="display:none;">🚪 Чыгуу</button>
+        <span id="userBadge" style="display:none; font-weight:700; color:var(--primary);"></span>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">☰</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1 class="fade-in">Келечегиңизди бүгүн баштаңыз 🚀</h1>
+        <p class="fade-in">Заманбап онлайн окуу платформасы. Мугалимдер жана студенттер үчүн ыңгайлуу, тез жана натыйжалуу.</p>
+        <div class="hero-buttons fade-in">
+          <button class="btn btn-primary" onclick="openModal('courseModal')">📚 Курстарды карап чыгуу</button>
+          <button class="btn btn-outline" onclick="openModal('authModal')">👤 Катталуу</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses">
+      <div class="container">
+        <div class="section-title">
+          <h2>📖 Бардык курстар</h2>
+          <p>Өзүңүзгө ылайыктуу багытты тандап, окууну баштаңыз</p>
+        </div>
+        <div class="category-filters" id="categoryFilters"></div>
+        <div class="courses-grid" id="coursesGrid"></div>
+      </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="feedback" style="background: var(--bg);">
+      <div class="container">
+        <div class="section-title">
+          <h2>💬 Сиздин пикириңиз маанилүү</h2>
+          <p>Платформабыз жөнүндө оюңузду бөлүшүңүз</p>
+        </div>
+        <form class="feedback-form" id="feedbackForm">
+          <div id="feedbackList" style="margin-top:30px;"></div>
+          <div class="form-group">
+            <label>Аты-жөнүңүз</label>
+            <input type="text" id="fbName" required placeholder="Мисалы: Айбек">
+          </div>
+          <div class="form-group">
+            <label>Баалоо</label>
+            <div class="rating-select" id="ratingSelect">
+              <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Пикиеңиз</label>
+            <textarea id="fbText" rows="4" required placeholder="Оюңузду жазыңыз..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">📤 Жөнөтүү</button>
+        </form>
+        <div id="feedbackSuccess" style="display:none; text-align:center; margin-top:20px; color:var(--success); font-weight:600;">✅ Рахмат! Пикириниз ийгиликтүү жөнөтүлдү.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>🎓 EduPlatform</h4>
+          <p style="color:var(--text-muted); margin-top:10px;">Сапаттуу билимге жеткиликтүү жол. 24/7 колдоо, сертифицикацияланган мугалимдер.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Меню</h4>
+          <ul>
+            <li><a href="#home">Башкы бет</a></li>
+            <li><a href="#courses">Курстар</a></li>
+            <li><a href="#feedback">Пикир</a></li>
+            <li><a href="#" onclick="openModal('authModal')">Катталуу</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Байланыш</h4>
+          <ul>
+            <li>📧 support@eduplatform.kg</li>
+            <li>📞 +996 (555) 123-456</li>
+            <li>📍 Бишкек, Кыргызстан</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 EduPlatform. Бардык укуктар корголгон.
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+      <div class="modal-tabs">
+        <button class="tab-btn active" data-tab="login">🔑 Кирүү</button>
+        <button class="tab-btn" data-tab="register">📝 Катталуу</button>
+      </div>
+      <div class="tab-content active" id="loginTab">
+        <form id="loginForm">
+          <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required></div>
+          <div class="form-group"><label>Сырсөз</label><input type="password" id="loginPass" required></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">🔓 Кирүү</button>
+        </form>
+      </div>
+      <div class="tab-content" id="registerTab">
+        <form id="registerForm">
+          <div class="form-group"><label>Аты-жөнү</label><input type="text" id="regName" required></div>
+          <div class="form-group"><label>Email</label><input type="email" id="regEmail" required></div>
+          <div class="form-group"><label>Сырсөз</label><input type="password" id="regPass" required></div>
+          <div class="form-group"><label>Роль</label>
+            <select id="regRole">
+              <option value="student">👨‍🎓 Студент</option>
+              <option value="teacher">👨‍🏫 Мугалим</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">📝 Катталуу</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Info Modal -->
+  <div class="modal-overlay course-info-modal" id="courseModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('courseModal')">✕</button>
+      <h2 id="cmTitle">Курс жөнүндө</h2>
+      <div class="course-details" id="cmDetails"></div>
+      <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="enrollCourse()">📚 Курска жазылуу</button>
+    </div>
+  </div>
+
+  <!-- Dashboard Modal (Role-based) -->
+  <div class="modal-overlay" id="dashboardModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('dashboardModal')">✕</button>
+      <h2 id="dashTitle">Менин кабинетим</h2>
+      <p id="dashWelcome" style="color:var(--text-muted); margin-bottom:15px;"></p>
+      <div class="dashboard-grid" id="dashGrid"></div>
+      <button class="btn btn-outline" style="width:100%; margin-top:20px;" onclick="closeModal('dashboardModal')">❌ Жабуу</button>
+    </div>
+  </div>
+  <div class="mobile-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i> </div>
+  <header>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">LOGO</div>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="#">Башкы</a>
+        <a href="#">Курстар</a>
+        <a href="#">Биз жөнүндө</a>
+      </div>
+
+      <div class="mobile-toggle" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>
+  <script src="script.js"></script>
+
+  
+</body>
+</html>
